@@ -1,4 +1,5 @@
 import 'package:d_using_widgets_git/config/menu/menu_items.dart';
+import 'package:d_using_widgets_git/presentation/screens/buttons/buttons_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -54,7 +55,11 @@ class _CustomListTile extends StatelessWidget {
       title: Text(menuItem.title),
       subtitle: Text(menuItem.subTitle),
       onTap: () {
-        
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ButtonsScreen(),
+          )
+        );
       },
     );
   }
