@@ -9,6 +9,7 @@ const colorList = <Color>[
   Colors.blue,
   Colors.orange,
   Colors.pink,
+  Colors.white,
 ];
 
 class Apptheme {
@@ -20,6 +21,7 @@ class Apptheme {
 
   ThemeData getTheme() => ThemeData(
     useMaterial3: true,
+    brightness: Brightness.dark,
     colorSchemeSeed: colorList[selectedColor],
     appBarTheme: const AppBarTheme(
       centerTitle: true,
