@@ -21,7 +21,7 @@ class Apptheme {
 
   ThemeData getTheme() => ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark,
+        brightness: Brightness.light,
     colorSchemeSeed: colorList[selectedColor],
     appBarTheme: const AppBarTheme(
       centerTitle: true,
