@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,6 +13,47 @@ class InfiniteScrollScreen extends StatefulWidget {
 
 class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
   List<int> imagesIds = [1, 2, 3, 4, 5];
+  final ScrollController scrollController = ScrollController();
+  bool isLoading = false;
+  bool isMounted = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    scrollController.addListener(() {
+      scrollController.position.maxScrollExtent;
+      if ((scrollController.position.pixels + 500) >=
+          scrollController.position.maxScrollExtent) {
+        loadNextPage();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    isMounted = false;
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  Future loadNextPage() async {
+    if (isLoading) return;
+    isLoading = true;
+    setState(() {});
+    await Future.delayed(const Duration(seconds: 2));
+    addFiveImages();
+    isLoading = false;
+
+    if (!isMounted) return;
+    setState(() {});
+  }
+
+  void addFiveImages() {
+    final lastId = imagesIds.last;
+
+    imagesIds.addAll([1, 2, 3, 4, 5].map((e) => lastId + e));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +63,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
         removeTop: true,
         removeBottom: true,
         child: ListView.builder(
+          controller: scrollController,
           itemCount: imagesIds.length,
           itemBuilder: (context, index) {
             return FadeInImage(
@@ -36,7 +79,12 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.pop(),
-        child: const Icon(Icons.arrow_back_ios_new_outlined),
+          child: isLoading
+              ? SpinPerfect(
+                  infinite: true,
+                  child: const Icon(Icons.refresh_rounded),
+                )
+              : const Icon(Icons.arrow_back_ios_new_outlined)
       ),
     );
   }
