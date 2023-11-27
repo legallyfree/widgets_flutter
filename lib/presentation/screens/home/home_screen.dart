@@ -1,4 +1,5 @@
 import 'package:d_using_widgets_git/config/menu/menu_items.dart';
+import 'package:d_using_widgets_git/presentation/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Flutter + Material 3"),
       ),
       body: const _HomeView(),
+      drawer: const SideMenu(),
     );
   }
 }
