@@ -8,3 +8,4 @@ export 'package:d_using_widgets_git/presentation/screens/progress/progress_scree
 export 'package:d_using_widgets_git/presentation/screens/snackbar/snackbar_screen.dart';
 export 'package:d_using_widgets_git/presentation/screens/ui_controls/ui_controls_screen.dart';
 export "package:d_using_widgets_git/presentation/screens/counter/counter_screen.dart";
+export 'package:d_using_widgets_git/presentation/screens/theme/theme_screen.dart';
