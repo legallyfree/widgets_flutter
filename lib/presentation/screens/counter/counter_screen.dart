@@ -20,7 +20,9 @@ class CounterScreen extends ConsumerWidget {
             style: Theme.of(context).textTheme.titleLarge),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          ref.read(counterProvider.notifier).state++;
+        },
         child: const Icon(Icons.add),
       ),
     );
