@@ -1,18 +1,23 @@
+import 'package:d_using_widgets_git/presentation/providers/counter_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
-class CounterScreen extends StatelessWidget {
+class CounterScreen extends ConsumerWidget {
   const CounterScreen({super.key});
 
   static const name = 'counter_screen';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final int clickCounter = ref.watch(counterProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Counter Riverpod'),
       ),
       body: Center(
-        child: Text('Valor: 10', style: Theme.of(context).textTheme.titleLarge),
+        child: Text('Valor: $clickCounter',
+            style: Theme.of(context).textTheme.titleLarge),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
