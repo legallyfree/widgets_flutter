@@ -1,7 +1,10 @@
-import 'package:d_using_widgets_git/config/menu/menu_items.dart';
-import 'package:d_using_widgets_git/presentation/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:d_using_widgets_git/presentation/providers/theme_provider.dart';
+import 'package:d_using_widgets_git/config/menu/menu_items.dart';
+import 'package:d_using_widgets_git/presentation/widgets/side_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -39,7 +42,7 @@ class _HomeView extends StatelessWidget {
   }
 }
 
-class _CustomListTile extends StatelessWidget {
+class _CustomListTile extends ConsumerWidget {
   const _CustomListTile({
     required this.menuItem,
   });
@@ -47,17 +50,18 @@ class _CustomListTile extends StatelessWidget {
   final MenuItem menuItem;
 
   @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<Color> colors = ref.watch(colorListProvider);
+    final int selectedColor = ref.watch(themeNotifierProvider).selectedColor;
 
     return ListTile(
       leading: Icon(
         menuItem.icon,
-        color: colors.primary,
+        color: colors[selectedColor],
       ),
       trailing: Icon(
         Icons.arrow_forward_ios_rounded,
-        color: colors.primary,
+        color: colors[selectedColor],
       ),
       title: Text(menuItem.title),
       subtitle: Text(menuItem.subTitle),
